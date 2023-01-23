@@ -7,7 +7,7 @@ import 'package:financial_application/Screens/First_Screen/Widgets/diagram_widge
 import 'package:financial_application/Screens/First_Screen/Widgets/financlal_goals_widget.dart';
 import 'package:financial_application/Screens/First_Screen/Widgets/top_container_widget.dart';
 import 'package:financial_application/Screens/First_Screen/Widgets/top_users_widget.dart';
-import 'package:financial_application/Screens/First_Screen/Widgets/recent_item_widget.dart';
+import 'package:financial_application/Screens/Widgets_global/recent_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       //appbar widget
       appBar: appBar_Widget(context: context),
-      body: Theme(   
+      body: Theme(
         data: Theme.of(context).copyWith(
             colorScheme: ColorScheme.fromSwatch()
                 .copyWith(secondary: const Color.fromARGB(0, 255, 255, 255))),
@@ -54,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
               containerHeight: 290,
               title: "Performance Chart",
               isShowMoreButton: true,
-              widget: diagram_widget(context),
+              widget: const Diagram(),
             ),
             const SizedBox(
               height: 35,
@@ -129,7 +129,7 @@ class _MyHomePageState extends State<MyHomePage> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          flex: 2,
+          flex: 5,
           child: Text(
             title.toUpperCase(),
             style: const TextStyle(

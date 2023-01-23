@@ -71,20 +71,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/icones/empty_user_icone.png
-    - assets/icones/green_up_icone.png
-    - assets/icones/notification.svg
-    - assets/icones/profile_icone.png
-    - assets/icones/check.png
-    - assets/icones/Visa Card_blue.png
-    - assets/icones/Visa Card_green.png
-    - assets/icones/Master-Card-Blue-icon.png
-    - assets/icones/Visa_Inc._logo.svg.png
-    - assets/icones/backIcon.png
-    - assets/icones/menuIcone.png
-    - assets/user_images/user_one_image.png
-    - assets/user_images/user_two_image.png
-    - assets/user_images/user_three_image.png
+    - assets/icones/
+    - assets/userImages/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

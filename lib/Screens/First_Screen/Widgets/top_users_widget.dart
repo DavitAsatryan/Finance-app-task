@@ -21,6 +21,19 @@ Container topUsersWidget(BuildContext context) {
               color: AppColors.redColor,
             )),
           );
+        } else if (state is GetUsersBlocErrorState) {
+          return Center(
+              child: Container(
+            child: const Text(
+              'Something is wrong',
+              style: TextStyle(
+                color: AppColors.redColor,
+                fontSize: 15,
+                fontFamily: 'Roboto',
+              ),
+              overflow: TextOverflow.visible,
+            ),
+          ));
         } else if (state is GetUsersBlocFetchSuccsesState) {
           return Theme(
             data: Theme.of(context).copyWith(
@@ -71,7 +84,7 @@ Padding topUsers(
               height: 10,
             ),
             Text(
-              state.userModel[index].name,
+              state.userModel[index].username,
               style: const TextStyle(
                   color: AppColors.blackColor,
                   fontSize: 12,

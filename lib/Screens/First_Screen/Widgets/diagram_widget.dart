@@ -3,79 +3,59 @@ import 'package:financial_application/Consts/app_size_const.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-//List<SelsData> _chartData;
+class Diagram extends StatefulWidget {
+  const Diagram({Key? key}) : super(key: key);
 
-// List<SelsData> getChartData() {
-//   final List<SelsData> chartData = [
-//     SelsData(month: "Jan", number: 0),
-//     SelsData(month: "Feb", number: 250),
-//     SelsData(month: "Mar", number: 500),
-//     SelsData(month: "Apr", number: 510),
-//     SelsData(month: "May", number: 520),
-//     SelsData(month: "Jun", number: 530),
-//   ];
-//   return chartData;
-// }
+  @override
+  State<Diagram> createState() => _DiagramState();
+}
 
-Container diagram_widget(BuildContext context) {
-  List<FlSpot> spotList = [
-    FlSpot(0, 1.6),
-    FlSpot(1.1, 1.3),
-    FlSpot(2.4, 2.4),
-    FlSpot(3.2, 1.9),
-    FlSpot(4.1, 0.7),
-    FlSpot(5.1, 1.5),
-    FlSpot(6.2, 2.1),
-    FlSpot(7.8, 1.6),
-  ];
-  int showingTooltipSpot = 1;
-  return Container(
-    alignment: Alignment.center,
-    decoration: const BoxDecoration(
-        //color: AppColors.topBackgroundColor,
+class _DiagramState extends State<Diagram> {
+  bool isPressed = false;
 
-        ),
-    width: AppSizeConst(context).width / 1.3,
-    child: SingleChildScrollView(
-      padding: const EdgeInsets.only(left: 15),
-      scrollDirection: Axis.horizontal,
-      child: Container(
-        width: 450,
-        height: 235,
-        decoration: const BoxDecoration(
-            //color: AppColors.topBackgroundColor,
+  @override
+  Widget build(BuildContext context) {
+    return diagram_widget(context);
+  }
 
-            ),
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Container(
+  Container diagram_widget(BuildContext context) {
+    List<FlSpot> spotList = [
+      FlSpot(0, 1.6),
+      FlSpot(1.1, 1.3),
+      FlSpot(2.4, 2.4),
+      FlSpot(3.2, 1.9),
+      FlSpot(4.1, 0.7),
+      FlSpot(5.1, 1.5),
+      FlSpot(6.2, 2.1),
+      FlSpot(7.8, 1.6),
+    ];
+    int showingTooltipSpot = 1;
+    return Container(
+      alignment: Alignment.center,
+      decoration: const BoxDecoration(
+          //color: AppColors.topBackgroundColor,
+
+          ),
+      width: AppSizeConst(context).width / 1.3,
+      child: Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          SingleChildScrollView(
+            padding: const EdgeInsets.only(left: 5, right: 5),
+            scrollDirection: Axis.horizontal,
+            child: SizedBox(
+              width: 600,
+              height: 235,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10),
                 child: LineChart(
                   LineChartData(
-                      //         showingTooltipIndicators:  showingTooltipSpot != -1 ? [ShowingTooltipIndicators([
-                      //   LineBarSpot(spotList[0], showingTooltipSpot,
-                      //       spotList[0].spots[showingTooltipSpot]),
-                      // ])] : [],
                       backgroundColor:
-                          AppColors.darkGrayColor.withOpacity(0.09),
+                          AppColors.darkGrayColor.withOpacity(0.19),
                       minX: 0,
-                      maxX: 11,
+                      maxX: 16.5,
                       minY: 0,
                       maxY: 3,
-                      lineTouchData: LineTouchData(
-                        touchCallback: (p0) {
-                          // for (var i = 0; i < p0.lineBarSpots.length; i++) {
-                          //   print(p0.lineBarSpots![i].spotIndex);
-
-                          //   if (p0.lineBarSpots![i].spotIndex == spotList[i]) {
-                          //     spotList[i].copyWith(x: 54, y: 44);
-                          //   }
-                          // }
-                          // p0.lineBarSpots![0];
-                        },
-                      ),
-                      // betweenBarsData: [BetweenBarsData(fromIndex: 1, toIndex: 1)],
                       titlesData: LineTitleData.getTitleData(),
                       gridData: FlGridData(
                           checkToShowVerticalLine: (value) => true,
@@ -92,6 +72,9 @@ Container diagram_widget(BuildContext context) {
                         LineChartBarData(
                           spots: spotList.map((e) => e).toList(),
                           isCurved: true,
+                          dotData: FlDotData(
+                            show: false,
+                          ),
                           colors: [AppColors.blueColor],
                           barWidth: 1.5,
                         ),
@@ -99,70 +82,68 @@ Container diagram_widget(BuildContext context) {
                 ),
               ),
             ),
-            diagram_top_text(),
-          ],
-        ),
+          ),
+          diagram_top_text(context),
+        ],
       ),
-    ),
-  );
+    );
+  }
 }
 
-Align diagram_top_text() {
-  return Align(
-    alignment: Alignment.topCenter,
-    child: Container(
-        width: 200,
-        height: 45,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-            color: AppColors.backgroundColor,
-            borderRadius: const BorderRadius.all(Radius.circular(5)),
-            boxShadow: [
-              BoxShadow(
-                offset: const Offset(0, 3.0),
-                blurRadius: 5.0,
-                color: AppColors.darkGrayColor.withOpacity(0.1),
-              ),
-              BoxShadow(
-                offset: const Offset(0, 10.0),
-                blurRadius: 5.0,
-                color: AppColors.darkGrayColor.withOpacity(0.1),
-              ),
-              BoxShadow(
-                offset: const Offset(0, -1.0),
-                blurRadius: 5.0,
-                color: AppColors.darkGrayColor.withOpacity(0.1),
-              ),
-              BoxShadow(
-                offset: const Offset(0, -1.0),
-                blurRadius: 5.0,
-                color: AppColors.darkGrayColor.withOpacity(0.1),
-              ),
-            ]),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: const [
-            Text(
-              "489",
-              style: TextStyle(
-                  color: AppColors.blackColor,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Text(
-              "additional text",
-              style: TextStyle(
-                  color: AppColors.blackColor,
-                  fontSize: 19,
-                  fontWeight: FontWeight.w300),
-            ),
-          ],
-        )),
+Container diagram_top_text(BuildContext context) {
+  return Container(
+    width: 200,
+    height: 40,
+    alignment: Alignment.center,
+    decoration: BoxDecoration(
+        color: AppColors.backgroundColor,
+        borderRadius: const BorderRadius.all(Radius.circular(5)),
+        boxShadow: [
+          BoxShadow(
+            offset: const Offset(0, 3.0),
+            blurRadius: 5.0,
+            color: AppColors.darkGrayColor.withOpacity(0.1),
+          ),
+          BoxShadow(
+            offset: const Offset(0, 10.0),
+            blurRadius: 5.0,
+            color: AppColors.darkGrayColor.withOpacity(0.1),
+          ),
+          BoxShadow(
+            offset: const Offset(0, -1.0),
+            blurRadius: 5.0,
+            color: AppColors.darkGrayColor.withOpacity(0.1),
+          ),
+          BoxShadow(
+            offset: const Offset(0, -1.0),
+            blurRadius: 5.0,
+            color: AppColors.darkGrayColor.withOpacity(0.1),
+          ),
+        ]),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: const [
+        Text(
+          "489",
+          style: TextStyle(
+              color: AppColors.blackColor,
+              fontSize: 22,
+              fontWeight: FontWeight.bold),
+        ),
+        SizedBox(
+          width: 10,
+        ),
+        Text(
+          "additional text",
+          style: TextStyle(
+              color: AppColors.blackColor,
+              fontSize: 19,
+              fontWeight: FontWeight.w300),
+        ),
+      ],
+    ),
   );
 }
 
@@ -173,7 +154,7 @@ class LineTitleData {
         showTitles: true,
         interval: 1.3,
         margin: 10,
-        reservedSize: 20,
+        reservedSize: 30,
         getTextStyles: (value) => const TextStyle(
             color: AppColors.darkGrayColor,
             fontSize: 15,
@@ -193,41 +174,37 @@ class LineTitleData {
       topTitles: null,
       bottomTitles: SideTitles(
         showTitles: true,
-        interval: 1.5,
+        // interval: ,
         margin: 15,
         reservedSize: 20,
-        checkToShowTitle:
-            (minValue, maxValue, sideTitles, appliedInterval, value) => true,
         getTextStyles: (value) => const TextStyle(
             color: AppColors.darkGrayColor,
-            fontSize: 15,
+            fontSize: 12,
             fontWeight: FontWeight.normal),
         getTitles: (value) {
           switch (value.toInt()) {
-            case 1:
-              return "JAN";
+            case 0:
+              return "JAN".toString().padLeft(18);
             case 2:
-              return "FEB";
+              return "FEB".toString().padLeft(10);
             case 3:
-              return "MAR";
-            case 4:
-              return "APR";
+              return "MAR".toString().padLeft(20);
             case 5:
-              return "MAY";
+              return "APR".toString().padLeft(8);
             case 6:
-              return "JUN";
-            case 7:
-              return "JUL";
+              return "MAY".toString().padLeft(18);
             case 8:
-              return "AUG";
+              return "JUN".toString().padLeft(8);
             case 9:
-              return "SEP";
-            case 10:
-              return "OCT";
+              return "JUL".toString().padLeft(20);
             case 11:
-              return "NOV";
+              return "AUG".toString().padLeft(10);
             case 12:
-              return "DEC";
+              return "SEP".toString().padLeft(19);
+            case 14:
+              return "OCT".toString().padLeft(10);
+            case 15:
+              return "DEC".toString().padLeft(19);
           }
           return "";
         },

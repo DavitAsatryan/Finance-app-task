@@ -15,7 +15,6 @@ _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
       phone: json['phone'] as String,
       website: json['website'] as String,
       company: CompanyModel.fromJson(json['company'] as Map<String, dynamic>),
-      userImages: json['userImages'] as String,
     );
 
 Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>

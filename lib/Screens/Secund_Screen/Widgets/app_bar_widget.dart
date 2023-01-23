@@ -6,9 +6,9 @@ AppBar app_bar_widget(BuildContext context) {
   return AppBar(
     actions: [IconButton(onPressed: () {}, icon: AppIcons.menuIcone)],
     elevation: 0,
-    leading: InkWell(
-      child: AppIcons.backIcone,
-      onTap: () => Navigator.of(context).pop(),
+    leading: IconButton(
+      icon: AppIcons.backIcone,
+      onPressed: () => Navigator.of(context).pop(),
     ),
     backgroundColor: Colors.transparent,
     title: const Text(

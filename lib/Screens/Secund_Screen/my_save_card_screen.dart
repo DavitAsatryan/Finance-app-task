@@ -1,7 +1,9 @@
+import 'package:financial_application/Bloc/Get_users_bloc/get_users_bloc_bloc.dart';
 import 'package:financial_application/Screens/Secund_Screen/Widgets/app_bar_widget.dart';
 import 'package:financial_application/Screens/Secund_Screen/Widgets/tab_bar_widget.dart';
 import 'package:financial_application/Screens/Secund_Screen/Widgets/visa_cards_container_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CreditCardsPage extends StatefulWidget {
   @override
@@ -13,11 +15,14 @@ class _CreditCardsPageState extends State<CreditCardsPage>
   late final PageController pageController;
   TabController? controller;
   int pageNow = 0;
+  var blocGetUsers;
 
   @override
   void initState() {
     pageController = PageController(initialPage: 0, viewportFraction: 0.81);
     controller = TabController(length: 4, vsync: this);
+    blocGetUsers = BlocProvider.of<GetUsersBlocBloc>(context);
+    blocGetUsers.add(GetUsersBlocEventInitial());
     super.initState();
   }
 

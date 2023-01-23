@@ -17,7 +17,6 @@ class UserModel with _$UserModel {
     required String website,
     required CompanyModel company,
     //users image from assets
-    required String userImages,
   }) = _UserModel;
 
   UserModel._();

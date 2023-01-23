@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 
 class AppButtonStyle {
   static final ButtonStyle style = ElevatedButton.styleFrom(
-      primary: AppColors.middlepurple.withOpacity(0.8),
-      padding: const EdgeInsets.symmetric(horizontal: 25),
+      primary: AppColors.darkGrayColor.withOpacity(0.5),
+      padding: const EdgeInsets.symmetric(horizontal: 5),
       elevation: 0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      minimumSize: const Size(120, 40));
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      minimumSize: const Size(80, 40),
+      maximumSize: const Size(120, 40));
 }

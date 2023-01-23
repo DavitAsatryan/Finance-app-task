@@ -50,8 +50,8 @@ abstract class $UserModelCopyWith<$Res> {
       AddressModel address,
       String phone,
       String website,
-      CompanyModel company,
-      String userImages});
+      CompanyModel company
+      });
 
   $AddressModelCopyWith<$Res> get address;
   $CompanyModelCopyWith<$Res> get company;
@@ -78,7 +78,6 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? phone = null,
     Object? website = null,
     Object? company = null,
-    Object? userImages = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -113,10 +112,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.company
           : company // ignore: cast_nullable_to_non_nullable
               as CompanyModel,
-      userImages: null == userImages
-          ? _value.userImages
-          : userImages // ignore: cast_nullable_to_non_nullable
-              as String,
+
     ) as $Val);
   }
 
@@ -152,8 +148,7 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       AddressModel address,
       String phone,
       String website,
-      CompanyModel company,
-      String userImages});
+      CompanyModel company,});
 
   @override
   $AddressModelCopyWith<$Res> get address;
@@ -180,7 +175,6 @@ class __$$_UserModelCopyWithImpl<$Res>
     Object? phone = null,
     Object? website = null,
     Object? company = null,
-    Object? userImages = null,
   }) {
     return _then(_$_UserModel(
       id: null == id
@@ -215,10 +209,7 @@ class __$$_UserModelCopyWithImpl<$Res>
           ? _value.company
           : company // ignore: cast_nullable_to_non_nullable
               as CompanyModel,
-      userImages: null == userImages
-          ? _value.userImages
-          : userImages // ignore: cast_nullable_to_non_nullable
-              as String,
+
     ));
   }
 }
@@ -235,7 +226,7 @@ class _$_UserModel extends _UserModel {
       required this.phone,
       required this.website,
       required this.company,
-      required this.userImages})
+     })
       : super._();
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
@@ -258,12 +249,11 @@ class _$_UserModel extends _UserModel {
   @override
   final CompanyModel company;
 //users image from assets
-  @override
-  final String userImages;
+
 
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, username: $username, email: $email, address: $address, phone: $phone, website: $website, company: $company, userImages: $userImages)';
+    return 'UserModel(id: $id, name: $name, username: $username, email: $email, address: $address, phone: $phone, website: $website, company: $company)';
   }
 
   @override
@@ -279,15 +269,15 @@ class _$_UserModel extends _UserModel {
             (identical(other.address, address) || other.address == address) &&
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.website, website) || other.website == website) &&
-            (identical(other.company, company) || other.company == company) &&
-            (identical(other.userImages, userImages) ||
-                other.userImages == userImages));
+            (identical(other.company, company) || other.company == company)
+
+               );
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, username, email,
-      address, phone, website, company, userImages);
+      address, phone, website, company);
 
   @JsonKey(ignore: true)
   @override
@@ -313,7 +303,7 @@ abstract class _UserModel extends UserModel {
       required final String phone,
       required final String website,
       required final CompanyModel company,
-      required final String userImages}) = _$_UserModel;
+     }) = _$_UserModel;
   _UserModel._() : super._();
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
@@ -335,8 +325,6 @@ abstract class _UserModel extends UserModel {
   String get website;
   @override
   CompanyModel get company;
-  @override //users image from assets
-  String get userImages;
   @override
   @JsonKey(ignore: true)
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>

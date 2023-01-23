@@ -17,18 +17,15 @@ class AppIcons {
   ];
 
   static final notificationIcon = SvgPicture.asset(
-      "assets/icones/notification.svg",
-      color: AppColors.whiteColor);
+    "assets/icones/notification.svg",
+    color: AppColors.backgroundColor,
+  );
   static final profileIcone = Image.asset("assets/icones/profile_icone.png");
 
   static final visablue = Image.asset("assets/icones/Visa Card_blue.png");
   static final visaGreen = Image.asset("assets/icones/Visa Card_green.png");
   static final visaLogo = Image.asset("assets/icones/Visa_Inc._logo.svg.png");
-  static final backIcone = Image.asset(
-    "assets/icones/backIcon.png",
-    height: 9,
-    width: 11,
-  );
+  static final backIcone = Image.asset("assets/icones/backIcon.png");
   static final menuIcone = Image.asset(
     "assets/icones/menuIcone.png",
     height: 12,

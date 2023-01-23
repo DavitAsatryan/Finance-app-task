@@ -18,10 +18,12 @@ AppBar appBar_Widget({required BuildContext context}) {
           builder: (context, state) {
             if (state is GetUsersBlocLoadingState) {
               return Center(
-                child: Container(
-                    child: const CircularProgressIndicator(
-                  color: AppColors.redColor,
-                )),
+                child: SizedBox(
+                    width: 10,
+                    height: 10,
+                    child: CircularProgressIndicator(
+                      color: AppColors.redColor.withOpacity(0.1),
+                    )),
               );
             } else if (state is GetUsersBlocFetchSuccsesState) {
               return Text(
@@ -44,12 +46,13 @@ AppBar appBar_Widget({required BuildContext context}) {
         const SizedBox(
           height: 5,
         ),
-        const Text(
+        Text(
           "Te tenemos excelentes noticias para ti",
           style: TextStyle(
-              color: AppColors.whiteColor,
-              fontFamily: 'Roboto',
-              fontSize: 11),
+            color: AppColors.whiteColor.withOpacity(0.7),
+            fontFamily: 'Roboto',
+            fontSize: 11,
+          ),
         ),
       ],
     ),
@@ -61,7 +64,10 @@ AppBar appBar_Widget({required BuildContext context}) {
       IconButton(
         onPressed: () {
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => CreditCardsPage(),
+            builder: (context) => BlocProvider<GetUsersBlocBloc>(
+              create: (context) => GetUsersBlocBloc(),
+              child: CreditCardsPage(),
+            ),
           ));
         },
         icon: AppIcons.profileIcone,
