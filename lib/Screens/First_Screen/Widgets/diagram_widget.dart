@@ -10,15 +10,33 @@ class Diagram extends StatefulWidget {
   State<Diagram> createState() => _DiagramState();
 }
 
-class _DiagramState extends State<Diagram> {
+class _DiagramState extends State<Diagram> with SingleTickerProviderStateMixin {
   bool isPressed = false;
+
+  late final AnimationController _controller = AnimationController(
+    duration: const Duration(seconds: 1),
+    vsync: this,
+  );
+  late final Animation<Offset> _offsetAnimation = Tween<Offset>(
+    begin: const Offset(1.5, 0.0),
+    end: const Offset(0, 0),
+  ).animate(CurvedAnimation(
+    parent: _controller,
+    curve: Curves.easeIn,
+  ));
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return diagram_widget(context);
   }
 
-  Container diagram_widget(BuildContext context) {
+  diagram_widget(BuildContext context) {
+    _controller.forward();
     List<FlSpot> spotList = [
       FlSpot(0, 1.6),
       FlSpot(1.1, 1.3),
@@ -30,61 +48,67 @@ class _DiagramState extends State<Diagram> {
       FlSpot(7.8, 1.6),
     ];
     int showingTooltipSpot = 1;
-    return Container(
-      alignment: Alignment.center,
-      decoration: const BoxDecoration(
-          //color: AppColors.topBackgroundColor,
 
-          ),
-      width: AppSizeConst(context).width / 1.3,
-      child: Stack(
-        alignment: Alignment.topCenter,
-        children: [
-          SingleChildScrollView(
-            padding: const EdgeInsets.only(left: 5, right: 5),
-            scrollDirection: Axis.horizontal,
-            child: SizedBox(
-              width: 600,
-              height: 235,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: LineChart(
-                  LineChartData(
-                      backgroundColor:
-                          AppColors.darkGrayColor.withOpacity(0.19),
-                      minX: 0,
-                      maxX: 16.5,
-                      minY: 0,
-                      maxY: 3,
-                      titlesData: LineTitleData.getTitleData(),
-                      gridData: FlGridData(
-                          checkToShowVerticalLine: (value) => true,
-                          drawVerticalLine: true,
-                          verticalInterval: 1.5,
-                          show: true,
-                          getDrawingVerticalLine: (value) => FlLine(
-                                color: AppColors.backgroundColor,
-                                strokeWidth: 5,
-                              ),
-                          drawHorizontalLine: false),
-                      borderData: FlBorderData(show: false),
-                      lineBarsData: [
-                        LineChartBarData(
-                          spots: spotList.map((e) => e).toList(),
-                          isCurved: true,
-                          dotData: FlDotData(
-                            show: false,
+    // 5. apply some transform to the given child
+
+    return SlideTransition(
+      position: _offsetAnimation,
+      child: Container(
+        alignment: Alignment.center,
+        decoration: const BoxDecoration(
+            //color: AppColors.topBackgroundColor,
+
+            ),
+        width: AppSizeConst(context).width / 1.3,
+        child: Stack(
+          alignment: Alignment.topCenter,
+          children: [
+            SingleChildScrollView(
+              padding: const EdgeInsets.only(left: 5, right: 5),
+              scrollDirection: Axis.horizontal,
+              child: SizedBox(
+                width: 600,
+                height: 235,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: LineChart(
+                    LineChartData(
+                        backgroundColor:
+                            AppColors.darkGrayColor.withOpacity(0.19),
+                        minX: 0,
+                        maxX: 16.5,
+                        minY: 0,
+                        maxY: 3,
+                        titlesData: LineTitleData.getTitleData(),
+                        gridData: FlGridData(
+                            checkToShowVerticalLine: (value) => true,
+                            drawVerticalLine: true,
+                            verticalInterval: 1.5,
+                            show: true,
+                            getDrawingVerticalLine: (value) => FlLine(
+                                  color: AppColors.backgroundColor,
+                                  strokeWidth: 5,
+                                ),
+                            drawHorizontalLine: false),
+                        borderData: FlBorderData(show: false),
+                        lineBarsData: [
+                          LineChartBarData(
+                            spots: spotList.map((e) => e).toList(),
+                            isCurved: true,
+                            dotData: FlDotData(
+                              show: false,
+                            ),
+                            colors: [AppColors.blueColor],
+                            barWidth: 1.5,
                           ),
-                          colors: [AppColors.blueColor],
-                          barWidth: 1.5,
-                        ),
-                      ]),
+                        ]),
+                  ),
                 ),
               ),
             ),
-          ),
-          diagram_top_text(context),
-        ],
+            diagram_top_text(context),
+          ],
+        ),
       ),
     );
   }
